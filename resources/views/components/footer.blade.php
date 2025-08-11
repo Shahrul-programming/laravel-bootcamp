@@ -33,6 +33,8 @@
                         <ul class="space-y-2">
                             <li><a href="{{ route('welcome') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('welcome') ? 'font-bold' : '' }}">Laman Utama</a></li>
                             <li><a href="{{ route('about') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('about') ? 'font-bold' : '' }}">Tentang Blog</a></li>
+                            <li><a href="{{ route('contact') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('contact') ? 'font-bold' : '' }}">Hubungi Kami</a></li>
+                            <li><a href="{{ route('blog.index') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('blog.index') ? 'font-bold' : '' }}">Blog</a></li>
                         </ul>
                     </div>
 
