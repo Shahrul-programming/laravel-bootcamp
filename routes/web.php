@@ -6,14 +6,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/tentang-blog', function () {
-    return view('about');
-})->name('about');
-
 Route::get('/hubungi-kami', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/blog-posts', function () {
-    return view('blog.index');
-})->name('blog.index');
+Route::get('/tentang-blog', [
+    \App\Http\Controllers\AboutController::class,
+    'index'
+])->name('about');
+
+Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
