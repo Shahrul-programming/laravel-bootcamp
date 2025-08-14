@@ -17,8 +17,8 @@
                 </div>
                 <div class="mb-6">
                 <h3 class="text-lg font-medium text-gray-900 mb-3 leading-snug">
-                    <a href="#" class="hover:text-gray-600 transition-colors">
-                    {{ $post['title'] }}
+                    <a href="{{ route('posts.show', $post['id']) }}" class="hover:text-gray-600 transition-colors">
+                        {{ $post['title'] }}
                     </a>
                 </h3>
                 <p class="text-sm text-gray-600 leading-relaxed">{{ $post['content'] }}</p>
