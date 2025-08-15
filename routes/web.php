@@ -22,4 +22,8 @@ Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'creat
 
 Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 
+Route::get('/posts/{slug}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{slug}', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{slug}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+
 Route::get('/posts/{slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
