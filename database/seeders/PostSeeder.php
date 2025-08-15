@@ -15,7 +15,8 @@ class PostSeeder extends Seeder
     {
        DB::table('posts')->insert([
             [
-                'title' => 'Asas Laravel untuk Pemulaan',
+                'slug' => 'asas-laravel-untuk-pemulaan1',
+                'title' => 'Asas Laravel untuk Pemulaan1',
                 'content' => 'Laravel adalah framework PHP yang popular untuk membangunkan aplikasi web. Dalam artikel ini, kita akan meneroka asas-asas Laravel, termasuk cara memasang dan memulakan projek Laravel pertama anda.',
                 'author' => 'Shahrul Naduan Hamidon',
                 'author_info' => 'Pengajar Pengaturcaraan',
@@ -25,7 +26,8 @@ class PostSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Asas Laravel untuk Pemulaan',
+                'slug' => 'asas-laravel-untuk-pemulaan2',
+                'title' => 'Asas Laravel untuk Pemulaan2',
                 'content' => 'Laravel adalah framework PHP yang popular untuk membangunkan aplikasi web. Dalam artikel ini, kita akan meneroka asas-asas Laravel, termasuk cara memasang dan memulakan projek Laravel pertama anda.',
                 'author' => 'Shahrul Naduan Hamidon',
                 'author_info' => 'Pengajar Pengaturcaraan',
@@ -35,7 +37,8 @@ class PostSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Asas Laravel untuk Pemulaan',
+                'slug' => 'asas-laravel-untuk-pemulaan3',
+                'title' => 'Asas Laravel untuk Pemulaan3',
                 'content' => 'Laravel adalah framework PHP yang popular untuk membangunkan aplikasi web. Dalam artikel ini, kita akan meneroka asas-asas Laravel, termasuk cara memasang dan memulakan projek Laravel pertama anda.',
                 'author' => 'Shahrul Naduan Hamidon',
                 'author_info' => 'Pengajar Pengaturcaraan',
@@ -45,7 +48,8 @@ class PostSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Asas Laravel untuk Pemulaan',
+                'slug' => 'asas-laravel-untuk-pemulaan4',
+                'title' => 'Asas Laravel untuk Pemulaan4',
                 'content' => 'Laravel adalah framework PHP yang popular untuk membangunkan aplikasi web. Dalam artikel ini, kita akan meneroka asas-asas Laravel, termasuk cara memasang dan memulakan projek Laravel pertama anda.',
                 'author' => 'Shahrul Naduan Hamidon',
                 'author_info' => 'Pengajar Pengaturcaraan',
