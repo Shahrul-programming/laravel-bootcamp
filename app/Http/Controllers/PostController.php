@@ -2,79 +2,100 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-        return view('posts.index', compact('posts'));
-    }
+        $query = Post::with('user')->orderBy('created_at', 'desc');
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required',
-            'slug' => 'required|unique:posts,slug',
-            'content' => 'required',
-            'category' => 'required',
-            'author' => 'required',
-            'author_info' => 'required',
-            'image' => 'nullable|string|max:2048',
-            'created_at' => 'nullable|date',
-            'updated_at' => 'nullable|date',
+        // Handle search function
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            // title, content, category, user
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('content', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('category', 'like', '%' . $searchTerm . '%')
+                    ->orWhereHas('user', function($q) use ($searchTerm) {
+                        $q->where('name', 'like', '%' . $searchTerm . '%');
+                    });
+            });
+        }
+
+        return view('posts.index', [
+            'posts' => $query->get()
         ]);
-
-        $post = Post::create($validated);
-
-        return redirect()->route('posts.show', ['slug' => $post->slug])
-            ->with('success', 'Post berjaya ditambah!');
     }
 
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
-        return view('posts.show', compact('post'));
-    }
-
-    public function create()
-    {
-        return view('posts.create');
+        $post = Post::with(['user', 'comments'])->where('slug', $slug)->firstOrFail();
+        return view('posts.show', [
+            'post' => $post
+        ]);
     }
 
     public function edit($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-        return view('posts.edit', compact('post'));
+        $users = User::all();
+        return view('posts.edit', [
+            'post' => $post,
+            'users' => $users
+        ]);
+    }
+
+    public function create()
+    {
+        $users = User::all();
+        return view('posts.create', compact('users'));
+    }
+
+    public function store(Request $request)
+    {
+        // Input Validation.
+        $validatedData = $request->validate([
+            'slug' => 'required|string|max:255|unique:posts,slug',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'user_id' => 'nullable|exists:users,id',
+            'image' => 'nullable|string|max:2048',
+            'category' => 'required|string|max:255',
+        ]);
+        // Store data ke database.
+        Post::create($validatedData);
+        // Return back dengan message.
+        return back()->with('success', 'Post created successfully!');
     }
 
     public function update(Request $request, $slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
 
-        $validated = $request->validate([
-            'title' => 'required',
-            'slug' => 'required|unique:posts,slug,' . $post->id,
-            'content' => 'required',
-            'category' => 'required',
-            'author' => 'required',
-            'author_info' => 'required',
-            'image' => 'required',
+        // Input Validation.
+        $validatedData = $request->validate([
+            'slug' => 'required|string|max:255|unique:posts,slug,' . $post->id,
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'user_id' => 'nullable|exists:users,id',
+            'image' => 'nullable|string|max:2048',
+            'category' => 'required|string|max:255',
         ]);
 
-        $post->update($validated);
+        $post->update($validatedData);
 
-        return redirect()->route('posts.show', ['slug' => $post->slug])
-            ->with('success', 'Post berjaya dikemaskini!');
+        return back()->with('success', 'Post updated successfully!');
     }
 
     public function destroy($slug)
-{
-    $post = Post::where('slug', $slug)->firstOrFail();
-    $post->delete();
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $post->delete();
 
-    return redirect()->route('posts.index')->with('success', 'Post berjaya dipadam!');
-}
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
+    }
 }

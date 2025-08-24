@@ -6,6 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $fillable = [
+        'title',
+        'content',
+        'image',
+        'category',
+        'slug',
+        'user_id',
+        'author',
+        'author_info',
+    ];
 
-protected $fillable = ['title', 'slug','content', 'category', 'author', 'author_info', 'image', 'created_at', 'updated_at'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+    }
 }
