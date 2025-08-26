@@ -88,7 +88,9 @@ class PostController extends Controller
 
         $post->update($validatedData);
 
-        return back()->with('success', 'Post updated successfully!');
+        // Redirect ke slug terbaru (jika slug berubah)
+        return redirect()->route('posts.show', $post->slug)
+            ->with('success', 'Post updated successfully!');
     }
 
     public function destroy($slug)

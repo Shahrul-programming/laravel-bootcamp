@@ -1,25 +1,24 @@
-{{-- filepath: resources/views/posts/edit.blade.php --}}
 @extends('layouts.app')
 @section('title', 'Edit Post - ' . $post->title)
 @section('content')
-
-@if(session('success'))
-    <div class="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
-        <div class="flex items-center">
-            <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            <span class="text-green-700 font-medium">{{ session('success') }}</span>
-        </div>
-    </div>
-@endif
-
 <div class="max-w-4xl mx-auto px-6 py-16">
     <!-- Header Section -->
     <div class="mb-12 text-center">
         <h1 class="text-3xl font-light tracking-wide text-gray-800 mb-4">Edit Post</h1>
         <p class="text-gray-500 text-sm">Update your blog post content and information</p>
     </div>
+
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-green-700 font-medium">{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
 
     <!-- Form Container -->
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm">
@@ -46,10 +45,12 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('title') border-red-300 @enderror"
                             value="{{ old('title', $post->title) }}"
                             placeholder="Enter an engaging title for your post"
-                            required
                         >
                         @error('title')
                             <p class="text-red-500 text-sm mt-2 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
                                 {{ $message }}
                             </p>
                         @enderror
@@ -66,10 +67,12 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('slug') border-red-300 @enderror"
                             value="{{ old('slug', $post->slug) }}"
                             placeholder="url-friendly-slug"
-                            required
                         >
                         @error('slug')
                             <p class="text-red-500 text-sm mt-2 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
                                 {{ $message }}
                             </p>
                         @enderror
@@ -86,10 +89,12 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('category') border-red-300 @enderror"
                             value="{{ old('category', $post->category) }}"
                             placeholder="e.g., Programming, Technology"
-                            required
                         >
                         @error('category')
                             <p class="text-red-500 text-sm mt-2 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
                                 {{ $message }}
                             </p>
                         @enderror
@@ -106,10 +111,12 @@
                         rows="8"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('content') border-red-300 @enderror"
                         placeholder="Write your post content here..."
-                        required
                     >{{ old('content', $post->content) }}</textarea>
                     @error('content')
                         <p class="text-red-500 text-sm mt-2 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
                             {{ $message }}
                         </p>
                     @enderror
@@ -126,7 +133,7 @@
                 <div class="grid grid-cols-1 gap-6">
                     <div>
                         <label for="user_id" class="block text-sm font-medium text-gray-700 mb-2">
-                            Author (User)
+                            Author
                         </label>
                         <select
                             name="user_id"
@@ -142,42 +149,11 @@
                         </select>
                         @error('user_id')
                             <p class="text-red-500 text-sm mt-2 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
                                 {{ $message }}
                             </p>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="author" class="block text-sm font-medium text-gray-700 mb-2">
-                            Author Name <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="author"
-                            id="author"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('author') border-red-300 @enderror"
-                            value="{{ old('author', $post->author) }}"
-                            placeholder="Nama penulis"
-                            required
-                        >
-                        @error('author')
-                            <p class="text-red-500 text-sm mt-2 flex items-center">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="author_info" class="block text-sm font-medium text-gray-700 mb-2">
-                            Author Info <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="author_info"
-                            id="author_info"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('author_info') border-red-300 @enderror"
-                            value="{{ old('author_info', $post->author_info) }}"
-                            placeholder="Contoh: Pensyarah, Penulis, dll"
-                            required
-                        >
-                        @error('author_info')
-                            <p class="text-red-500 text-sm mt-2 flex items-center">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -197,6 +173,9 @@
                     <p class="text-xs text-gray-500 mt-1">Provide a URL to the author's profile picture</p>
                     @error('image')
                         <p class="text-red-500 text-sm mt-2 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
                             {{ $message }}
                         </p>
                     @enderror
@@ -223,19 +202,17 @@
 </div>
 
 <script>
-// Auto-generate slug from title only if slug is empty
 document.getElementById('title').addEventListener('input', function() {
     const title = this.value;
     const slugField = document.getElementById('slug');
-    if (slugField.value.trim() === '') {
-        const slug = title
-            .toLowerCase()
-            .replace(/[^a-z0-9 -]/g, '')
-            .replace(/\s+/g, '-')
-            .replace(/-+/g, '-')
-            .trim('-');
-        slugField.value = slug;
-    }
+    // Sentiasa update slug berdasarkan title
+    const slug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9 -]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    slugField.value = slug;
 });
 </script>
 @endsection

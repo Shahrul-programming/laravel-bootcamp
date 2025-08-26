@@ -89,3 +89,23 @@ Route::get('test', function() {
 
     // dd($posts);
 });
+
+Route::get('login', [
+    \App\Http\Controllers\Auth\AuthController::class,
+    'showLoginForm'
+])->name('login');
+
+Route::post('login', [
+    \App\Http\Controllers\Auth\AuthController::class,
+    'login'
+])->name('login.post');
+
+Route::post('logout', [
+    \App\Http\Controllers\Auth\AuthController::class,
+    'logout'
+])->name('logout');
+
+Route::post('register', [
+    \App\Http\Controllers\Auth\AuthController::class,
+    'register'
+])->name('register.post');

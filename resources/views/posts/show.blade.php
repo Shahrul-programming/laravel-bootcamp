@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', $post->title)
 @section('content')
-<div class="max-w-4xl mx-auto px-6 py-12">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 animate-fade-in">
     <!-- Navigation Breadcrumb -->
     <nav class="mb-8">
         <div class="flex items-center space-x-2 text-sm text-gray-500">
@@ -18,29 +18,30 @@
 
     <!-- Article Header -->
     <header class="mb-12 text-center">
-        <div class="mb-6">
-            <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+        <div class="mb-6 flex flex-col items-center gap-2">
+            <span class="inline-flex items-center px-4 py-1 bg-gradient-to-r from-blue-200 to-blue-400 text-blue-900 text-sm font-semibold rounded-full shadow-sm">
+                <svg class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 9.25C2.003 5.798 5.798 2 10.001 2c4.202 0 7.997 3.798 7.997 7.25 0 4.452-3.795 8.25-7.997 8.25-4.203 0-7.998-3.798-7.998-8.25z"/></svg>
                 {{ $post->category }}
             </span>
         </div>
 
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight tracking-tight drop-shadow-lg">
             {{ $post->title }}
         </h1>
 
-        <div class="flex items-center justify-center space-x-6 text-gray-600">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-gray-600">
             <div class="flex items-center space-x-3">
-                <img src="{{ $post->image }}" alt="{{ $post->user ? $post->user->name : 'Unknown Author' }}" class="w-12 h-12 rounded-full border-2 border-gray-200">
+                <img src="{{ $post->image }}" alt="{{ $post->user ? $post->user->name : 'Unknown Author' }}" class="w-14 h-14 rounded-full border-4 border-blue-200 shadow-md">
                 <div class="text-left">
                     <p class="font-semibold text-gray-900">{{ $post->user ? $post->user->name : 'Unknown Author' }}</p>
-                    <p class="text-sm text-gray-500">{{ $post->user ? $post->user->email : 'No email available' }}</p>
+                    <p class="text-xs text-gray-500">{{ $post->user ? $post->user->email : 'No email available' }}</p>
                 </div>
             </div>
-            <div class="h-8 w-px bg-gray-300"></div>
+            <div class="hidden md:block h-8 w-px bg-gray-300"></div>
             <div class="text-center">
-                <time datetime="{{ $post->created_at }}" class="text-sm text-gray-500">
+                <time datetime="{{ $post->created_at }}" class="text-xs text-gray-500">
                     Published on<br>
-                    <span class="font-medium text-gray-700">{{ \Carbon\Carbon::parse($post->created_at)->format('F j, Y') }}</span>
+                    <span class="font-medium text-blue-700">{{ \Carbon\Carbon::parse($post->created_at)->format('F j, Y') }}</span>
                 </time>
             </div>
         </div>
@@ -48,8 +49,8 @@
 
     <!-- Article Content -->
     <article class="prose prose-lg max-w-none">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 md:p-12">
-            <div class="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+        <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-12 transition-transform hover:scale-[1.01]">
+            <div class="text-gray-800 leading-relaxed text-lg whitespace-pre-line font-serif">
                 {{ $post->content }}
             </div>
         </div>
@@ -59,8 +60,8 @@
     <footer class="mt-12 pt-8 border-t border-gray-200">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-2 text-sm text-gray-500">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <div class="flex items-center space-x-2 text-xs text-gray-500">
+                    <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
                     </svg>
                     <span>Published {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
@@ -69,36 +70,36 @@
 
             <!-- Action Buttons -->
             <div class="flex items-center space-x-3">
-                <a href="{{ route('posts.index') }}"
-                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                     <a href="{{ route('posts.index') }}"
+                         class="inline-flex items-center px-4 py-2 border border-gray-200 text-sm font-semibold rounded-lg text-gray-700 bg-white hover:bg-blue-50 shadow-sm transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                     Back to Posts
                 </a>
 
-                <a href="{{ route('posts.edit', ['slug' => $post->slug]) }}"
-                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                     <a href="{{ route('posts.edit', ['slug' => $post->slug]) }}"
+                         class="inline-flex items-center px-4 py-2 border border-gray-200 text-sm font-semibold rounded-lg text-gray-700 bg-white hover:bg-yellow-50 shadow-sm transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                     </svg>
                     Edit Post
                 </a>
 
-                <a href="{{ route('posts.create') }}"
-                   class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                     <a href="{{ route('posts.create') }}"
+                         class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 shadow-md transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
                     New Post
                 </a>
 
-                <form action="{{ route('posts.destroy', $post['slug']) }}" method="POST" class="inline-block"
-                      onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.')">
+            <form action="{{ route('posts.destroy', $post['slug']) }}" method="POST" class="inline-block"
+                onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.')">
                     @csrf
                     @method('DELETE')
-                    <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 transition-colors">
+            <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 shadow-md transition-colors">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                         </svg>
@@ -112,13 +113,13 @@
     <!-- Comments Section -->
     <div class="mt-12 pt-8 border-t border-gray-200">
         <div class="mb-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+            <h3 class="text-2xl font-extrabold text-blue-800 mb-6 tracking-tight">
                 Comments ({{ $post->comments->count() }})
             </h3>
 
             <!-- Comment Form -->
-            <div class="bg-gray-50 rounded-lg p-6 mb-8">
-                <h4 class="text-lg font-semibold text-gray-900 mb-4">Leave a Comment</h4>
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 mb-8 shadow-sm">
+                <h4 class="text-lg font-bold text-blue-900 mb-4">Leave a Comment</h4>
 
                 @if (session('success'))
                     <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
@@ -173,8 +174,8 @@
                         @enderror
                     </div>
                     <div>
-                        <button type="submit"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-lg font-medium text-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+            <button type="submit"
+                class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 border border-transparent rounded-lg font-semibold text-sm text-white hover:from-blue-600 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md transition-colors">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
@@ -188,17 +189,17 @@
             @if($post->comments->count() > 0)
                 <div class="space-y-6">
                     @foreach($post->comments as $comment)
-                        <div class="bg-white rounded-lg border border-gray-200 p-6">
+                        <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow">
                             <div class="flex items-start justify-between">
                                 <div class="flex items-center space-x-3 mb-3">
-                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                                        <span class="text-white font-semibold text-sm">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow">
+                                        <span class="text-white font-bold text-lg">
                                             {{ strtoupper(substr($comment->author_name, 0, 1)) }}
                                         </span>
                                     </div>
                                     <div>
                                         <h5 class="font-semibold text-gray-900">{{ $comment->author_name }}</h5>
-                                        <p class="text-sm text-gray-500">
+                                        <p class="text-xs text-gray-500">
                                             {{ $comment->created_at->diffForHumans() }}
                                         </p>
                                     </div>
@@ -221,7 +222,7 @@
                                 @endauth
                             </div>
 
-                            <div class="text-gray-700 leading-relaxed whitespace-pre-line">
+                            <div class="text-gray-700 leading-relaxed whitespace-pre-line mt-2">
                                 {{ $comment->content }}
                             </div>
                         </div>
@@ -229,10 +230,10 @@
                 </div>
             @else
                 <div class="text-center py-8">
-                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="mx-auto h-12 w-12 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                     </svg>
-                    <h3 class="mt-2 text-sm font-medium text-gray-900">No comments yet</h3>
+                    <h3 class="mt-2 text-base font-semibold text-blue-800">No comments yet</h3>
                     <p class="mt-1 text-sm text-gray-500">Be the first to share your thoughts!</p>
                 </div>
             @endif

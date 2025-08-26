@@ -4,10 +4,10 @@
                     <div class="flex items-center space-x-8">
                         <a href="#" class="text-xl font-light text-gray-800">Aplikasi Blog</a>
                         <div class="hidden md:flex space-x-6">
-                            <li><a href="{{ route('welcome') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('welcome') ? 'font-bold' : '' }}">Laman Utama</a></li>
-                            <li><a href="{{ route('about') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('about') ? 'font-bold' : '' }}">Tentang Blog</a></li>
-                            <li><a href="{{ route('contact') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('contact') ? 'font-bold' : '' }}">Hubungi Kami</a></li>
-                            <li><a href="{{ route('posts.index') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('posts.index') ? 'font-bold' : '' }}">Blog Posts</a></li>
+                             <a href="{{ route('welcome') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('welcome') ? 'font-bold' : '' }}">Laman Utama</a>
+                             <a href="{{ route('about') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('about') ? 'font-bold' : '' }}">Tentang Blog</a>
+                             <a href="{{ route('contact') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('contact') ? 'font-bold' : '' }}">Hubungi Kami</a>
+                             <a href="{{ route('posts.index') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('posts.index') ? 'font-bold' : '' }}">Blog Posts</a>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
