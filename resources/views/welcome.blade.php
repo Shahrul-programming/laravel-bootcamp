@@ -1,19 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-6 py-16">
-            <div class="mb-16 text-center">
-            <h1 class="text-3xl font-light tracking-wide text-gray-800 mb-4">Aplikasi Blog</h1>
-            <p class="text-gray-500 text-sm">
-                Platform Pembelajaran Pengaturcaraan</p>
-            </div>
-            
-            <div class="mb-12">
-            <h2 class="text-2xl font-light text-gray-800 mb-2">Dari Blog Kami</h2>
-            <p class="text-gray-600 text-sm">
-                Belajar cara membangunkan kemahiran pengaturcaraan dan teknologi dengan panduan kami.</p>
-            </div>
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+<section class="relative overflow-hidden bg-gradient-to-br from-blue-100 via-blue-200 to-white pb-24 pt-20 mb-12">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+        <div class="flex-1 text-center md:text-left">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-blue-900 mb-6 drop-shadow-lg leading-tight">
+                Selamat Datang ke <span class="bg-gradient-to-r from-blue-500 to-blue-700 text-transparent bg-clip-text">Aplikasi Blog</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8 font-medium max-w-xl">
+                Platform pembelajaran pengaturcaraan terbaik untuk membina kemahiran teknologi anda. Belajar Laravel, PHP, dan teknologi web moden dengan panduan komprehensif.
+            </p>
+            <a href="{{ route('posts.index') }}" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white text-lg font-bold rounded-lg shadow-lg hover:scale-105 transition-transform">Mulakan Pembelajaran</a>
+        </div>
+        <div class="flex-1 flex justify-center md:justify-end">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Hero" class="w-[350px] md:w-[420px] rounded-2xl shadow-2xl border-4 border-white/80 object-cover">
+        </div>
+    </div>
+    <div class="absolute left-0 right-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+</section>
+
+<div class="max-w-6xl mx-auto px-6">
+    <div class="mb-12 text-center">
+        <h2 class="text-3xl font-extrabold text-blue-900 mb-2 drop-shadow">Dari Blog Kami</h2>
+        <p class="text-gray-600 text-base font-medium">
+            Belajar cara membangunkan kemahiran pengaturcaraan dan teknologi dengan panduan kami.
+        </p>
+    </div>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             <article class="bg-gray-50 rounded-lg p-6 hover:shadow-sm transition-shadow duration-200">
                 <div class="flex items-center gap-x-3 text-xs mb-4">
                 <time datetime="2024-12-15" class="text-gray-400">15 Dis 2024</time>
