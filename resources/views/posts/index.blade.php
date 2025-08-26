@@ -71,7 +71,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     @foreach($posts as $post)
-        <article class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-200 border border-gray-100 flex flex-col justify-between h-full">
+        <article class="bg-gradient-to-br from-blue-50/80 to-white/80 rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col justify-between h-full backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:bg-white/90 hover:border-blue-200">
             <div>
                 <div class="flex items-center gap-x-3 text-xs mb-4">
                     <time datetime="{{ $post->created_at }}" class="text-gray-400">{{ \Carbon\Carbon::parse($post->created_at)->format('j M Y') }}</time>
