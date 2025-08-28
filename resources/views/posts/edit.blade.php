@@ -135,18 +135,22 @@
                         <label for="user_id" class="block text-sm font-medium text-gray-700 mb-2">
                             Author
                         </label>
-                        <select
-                            name="user_id"
-                            id="user_id"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('user_id') border-red-300 @enderror"
-                        >
-                            <option value="">Select an author (optional)</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}" {{ old('user_id', $post->user_id) == $user->id ? 'selected' : '' }}>
-                                    {{ $user->name }} ({{ $user->email }})
-                                </option>
-                            @endforeach
-                        </select>
+                        @if($users->count() === 1)
+                            <input type="text" readonly class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-sm" value="{{ $users->first()->name }} ({{ $users->first()->email }})">
+                            <input type="hidden" name="user_id" value="{{ $users->first()->id }}">
+                        @else
+                            <select
+                                name="user_id"
+                                id="user_id"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm @error('user_id') border-red-300 @enderror"
+                            >
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" {{ old('user_id', $post->user_id) == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }} ({{ $user->email }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        @endif
                         @error('user_id')
                             <p class="text-red-500 text-sm mt-2 flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">

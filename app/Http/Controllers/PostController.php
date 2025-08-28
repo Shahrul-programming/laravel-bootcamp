@@ -42,7 +42,12 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-        $users = User::all();
+        $user = auth()->user();
+        if ($user->role === 'admin') {
+            $users = User::all();
+        } else {
+            $users = collect([$user]);
+        }
         return view('posts.edit', [
             'post' => $post,
             'users' => $users
@@ -51,13 +56,18 @@ class PostController extends Controller
 
     public function create()
     {
-        $users = User::all();
+        $user = auth()->user();
+        if ($user->role === 'admin') {
+            $users = User::all();
+        } else {
+            $users = collect([$user]);
+        }
         return view('posts.create', compact('users'));
     }
 
     public function store(Request $request)
     {
-        // Input Validation.
+        $user = auth()->user();
         $validatedData = $request->validate([
             'slug' => 'required|string|max:255|unique:posts,slug',
             'title' => 'required|string|max:255',
@@ -66,17 +76,18 @@ class PostController extends Controller
             'image' => 'nullable|string|max:2048',
             'category' => 'required|string|max:255',
         ]);
-        // Store data ke database.
+        // Security: author hanya boleh set user_id sendiri
+        if ($user->role !== 'admin') {
+            $validatedData['user_id'] = $user->id;
+        }
         Post::create($validatedData);
-        // Return back dengan message.
         return back()->with('success', 'Post created successfully!');
     }
 
     public function update(Request $request, $slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-
-        // Input Validation.
+        $user = auth()->user();
         $validatedData = $request->validate([
             'slug' => 'required|string|max:255|unique:posts,slug,' . $post->id,
             'title' => 'required|string|max:255',
@@ -85,10 +96,11 @@ class PostController extends Controller
             'image' => 'nullable|string|max:2048',
             'category' => 'required|string|max:255',
         ]);
-
+        // Security: author hanya boleh set user_id sendiri
+        if ($user->role !== 'admin') {
+            $validatedData['user_id'] = $user->id;
+        }
         $post->update($validatedData);
-
-        // Redirect ke slug terbaru (jika slug berubah)
         return redirect()->route('posts.show', $post->slug)
             ->with('success', 'Post updated successfully!');
     }
@@ -96,8 +108,8 @@ class PostController extends Controller
     public function destroy($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+        $this->authorize('delete', $post);
         $post->delete();
-
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }
 }

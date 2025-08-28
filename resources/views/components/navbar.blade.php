@@ -8,10 +8,15 @@
                              <a href="{{ route('about') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('about') ? 'font-bold' : '' }}">Tentang Blog</a>
                              <a href="{{ route('contact') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('contact') ? 'font-bold' : '' }}">Hubungi Kami</a>
                              <a href="{{ route('posts.index') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('posts.index') ? 'font-bold' : '' }}">Blog Posts</a>
+                            
+                             @if(auth()->user()?->role === 'admin')
+                             <a href="{{ route('admin.dashboard.index') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('admin.dashboard.index') ? 'text-red-900 font-bold' : '' }}">Dashboard</a>
+                             @endif
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
                         @auth
+                            <a href="{{ route('profile.edit') }}" class="text-sm text-blue-700 font-semibold hover:underline mr-2">Profil</a>
                             <span class="text-sm text-gray-600">Hello, {{ Auth::user()->name }}</span>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function () {
         \App\Http\Controllers\DashboardController::class,
         'index'
     ])->name('admin.dashboard.index');
+
+    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::get('test', function() {
@@ -91,8 +94,6 @@ Route::get('test', function() {
 
     // dd($posts);
 });
-
-
 
 Route::get('login', [
     \App\Http\Controllers\LoginController::class,
