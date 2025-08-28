@@ -110,11 +110,11 @@ Route::post('logout', [
 ])->name('logout');
 
 Route::post('register', [
-    \App\Http\Controllers\AuthController::class,
+    \App\Http\Controllers\LoginController::class,
     'register'
 ])->name('register.post');
 
 Route::get('register', [
-    \App\Http\Controllers\AuthController::class,
+    \App\Http\Controllers\LoginController::class,
     'showRegistrationForm'
 ])->name('register');
